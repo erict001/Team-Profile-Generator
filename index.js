@@ -3,8 +3,9 @@ const fs = require("fs")
 const Engineer = require("./lib/Engineer.js")
 const Intern = require("./lib/Intern.js")
 const Manager = require("./lib/Manager.js")
- 
-let team = []
+const team = require("./dist/generateHTML")
+
+let teamArray = [];
  
 const ask = () => {
    inquirer.prompt([
@@ -40,13 +41,14 @@ const ask = () => {
        },
    ]).then (ans => {
        let manager = new Manager (ans.managerName, ans.employeeID, ans.email, ans.phoneNumber, ans.jobTitle)
-       team.push(manager)
+       teamArray.push(manager)
        if(ans.jobTitle === "add an Engineer"){
            addEngineer();
        } else if (ans.jobTitle === "add an Intern"){
            addIntern();
        } else {
            console.log ("Generate HTML")
+           writeHTML();
        }
    })
  
@@ -83,14 +85,15 @@ const ask = () => {
                ]
            },
        ]).then(ans => {
-           let intern = new Intern(ans.engineerName, ans.engineerID, ans.engineerEmail, ans.engineerGithub, ans.finish)
-           team.push(intern)
+           let engineer = new Engineer(ans.engineerName, ans.engineerID, ans.engineerEmail, ans.engineerGithub, ans.finish)
+           teamArray.push(engineer)
            if(ans.finish === "add an Engineer"){
            addEngineer();
            } else if (ans.finish === "add an Intern"){
            addIntern();
            } else {
            console.log ("Generate HTML")
+           writeHTML();
        }
        })
    }
@@ -114,8 +117,8 @@ const ask = () => {
            },
            {
                type: "input",
-               name: "internGithub",
-               message: "What's your github username?"
+               name: "internSchool",
+               message: "What school did you they go to?"
            },
            {
                type: "list",
@@ -128,8 +131,8 @@ const ask = () => {
                ]
            },
        ]).then(ans => {
-           let intern = new Intern(ans.internName, ans.internID, ans.internEmail, ans.internGithub, ans.finish)
-           team.push(intern)
+           let intern = new Intern(ans.internName, ans.internID, ans.internEmail, ans.internSchool, ans.finish)
+           teamArray.push(intern)
            if(ans.finish === "add an Engineer"){
            addEngineer();
            } else if (ans.finish === "add an Intern"){
@@ -142,10 +145,12 @@ const ask = () => {
  
    }
 }
+
+ask();
  
 function writeHTML(){
     console.log(team)
-    fs.writeFile('index.html', generateHTML(), (err) => 
-    err ? console.log(err): console.log("Success!")
-    );
+    fs.writeFile("index.html", team(teamArray), (err) => 
+    err ? console.log("err"): console.log("Success!")
+    )
 }
