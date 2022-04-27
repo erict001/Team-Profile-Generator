@@ -26,7 +26,7 @@ const ask = () => {
        },
        {
            type: "input",
-           name: "phoneNumber",
+           name: "officeNumber",
            message: "What's your office's phone number?"
        },
        {
@@ -40,7 +40,8 @@ const ask = () => {
            ]
        },
    ]).then (ans => {
-       let manager = new Manager (ans.managerName, ans.employeeID, ans.email, ans.phoneNumber, ans.jobTitle)
+       const manager = new Manager (ans.managerName, ans.employeeID, ans.email, ans.officeNumber)
+       console.log(manager.getOfficeNumber())
        teamArray.push(manager)
        if(ans.jobTitle === "add an Engineer"){
            addEngineer();
@@ -48,6 +49,7 @@ const ask = () => {
            addIntern();
        } else {
            console.log ("Generate HTML")
+           console.log(teamArray)
            writeHTML();
        }
    })
@@ -85,13 +87,14 @@ const ask = () => {
                ]
            },
        ]).then(ans => {
-           let engineer = new Engineer(ans.engineerName, ans.engineerID, ans.engineerEmail, ans.engineerGithub, ans.finish)
+           const engineer = new Engineer(ans.engineerName, ans.engineerID, ans.engineerEmail, ans.engineerGithub)
            teamArray.push(engineer)
            if(ans.finish === "add an Engineer"){
            addEngineer();
            } else if (ans.finish === "add an Intern"){
            addIntern();
            } else {
+            console.log(teamArray)
            console.log ("Generate HTML")
            writeHTML();
        }
@@ -131,7 +134,7 @@ const ask = () => {
                ]
            },
        ]).then(ans => {
-           let intern = new Intern(ans.internName, ans.internID, ans.internEmail, ans.internSchool, ans.finish)
+           const intern = new Intern(ans.internName, ans.internID, ans.internEmail, ans.internSchool)
            teamArray.push(intern)
            if(ans.finish === "add an Engineer"){
            addEngineer();
@@ -139,6 +142,7 @@ const ask = () => {
            addIntern();
            } else {
            console.log ("Generate HTML")
+           console.log(teamArray)
            writeHTML();
        }
        })
@@ -149,8 +153,7 @@ const ask = () => {
 ask();
  
 function writeHTML(){
-    console.log(team)
+    console.log(team);
     fs.writeFile("index.html", team(teamArray), (err) => 
-    err ? console.log("err"): console.log("Success!")
-    )
+        err ? console.log("Error"): console.log ("No Error"))
 }

@@ -12,7 +12,7 @@ const generateHTML = team => {
             <ul class="list-group">
                 <li class="list-group-item">ID: ${manager.getId()}</li>
                 <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${manager.getNumber()}</li>
+                <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
             </ul>
         </div>
         </div>
@@ -39,7 +39,7 @@ const generateHTML = team => {
 
     // Generate HTML for Interns
 
-    const generateEngineer = intern => {
+    const generateEngineer = engineer => {
         return `
         <div class="card employee-card m-5">
         <div class="card-header text-center">
@@ -50,7 +50,7 @@ const generateHTML = team => {
             <ul class="list-group">
                 <li class="list-group-item">ID: ${engineer.getId()}</li>
                 <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${engineer.getSchool()}</li>
+                <li class="list-group-item">Office number: ${engineer.getGithub()}</li>
             </ul>
         </div>
         </div>
@@ -60,24 +60,22 @@ const generateHTML = team => {
     
     const html = []
     
-    html.push(team
-        .filter(employee => employee.getRole()===Manager)
+    html.push(
+        team.filter(employee => employee.getRole() === "Manager")
         .map(manager => generateManager(manager)));
     
-    html.push(team
-        .filter(employee => employee.getRole()===Engineer)
+    html.push(
+        team.filter(employee => employee.getRole() === "Engineer")
         .map(engineer => generateEngineer(engineer)));
     
-    html.push(team
-        .filter(employee => employee.getRole()===Intern)
-        .map(manager => generateIntern(intern)));
+    html.push(
+        team.filter(employee => employee.getRole() === "Intern")
+        .map(intern => generateIntern(intern)));
 
 
 return html.join("");
 
 };
-generateHTML()
-
     
 
 
@@ -107,7 +105,7 @@ module.exports = team => {
     <div class="container">
         <div class="row justify-content-between">
             <div class="team-area col-12 d-flex flex-wrap justify-content-center">
-                ${team}
+                ${generateHTML(team)}
             </div>
         </div>
     </div>
