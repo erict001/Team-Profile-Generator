@@ -21,6 +21,10 @@
     ## Usage
     To initiate the application, open up the integrated terminal in the application and type in <npm i> to install all of the relevant npm files in addition to Node.js.  Next, type in <node index.js> and you will be prompted for all of the relevant questions. Answer each prompt as you wish and then click "finish your team" and you will be generated the assosciated HTML. 
 
+    ![run tests](./assets/Screen%20Shot%202022-04-27%20at%207.00.39%20PM.png);
+    ![generatedHTML](./assets/Screen%20Shot%202022-04-27%20at%207.06.37%20PM.png);
+    ![video](./assets/Screen%20Recording%202022-04-27%20at%207.01.42%20PM.mov)
+
     ## Credits
     My tutor, Ben Lopez, the TA's, and some of my classmates were very helpful in finishing up this project. 
 

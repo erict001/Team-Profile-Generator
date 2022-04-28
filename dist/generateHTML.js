@@ -25,7 +25,7 @@ const generateHTML = team => {
         <div class="card employee-card m-5">
         <div class="card-header text-center">
             <h2 class="card-title">${intern.getName()}</h2>
-            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${intern.getRole()}</h3>
+            <h3 class="card-title"><i class="fas fa-graduation-cap"></i>${intern.getRole()}</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
@@ -44,7 +44,7 @@ const generateHTML = team => {
         <div class="card employee-card m-5">
         <div class="card-header text-center">
             <h2 class="card-title">${engineer.getName()}</h2>
-            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${engineer.getRole()}</h3>
+            <h3 class="card-title"><i class="fas fa-glasses"></i>${engineer.getRole()}</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
